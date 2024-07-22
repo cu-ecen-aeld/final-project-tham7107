@@ -2,3 +2,7 @@
 	path = buildroot
 	url = https://git.busybox.net/buildroot/
 	branch = 2024.05.x
+[submodule "qemu"]
+	path = qemu
+	url = https://gitlab.com/qemu-project/qemu
+	branch = stable-9.0
