@@ -3,7 +3,6 @@
 #Host forwarding: Host Port 10022 ->> QEMU Port 22 
 #Author: Siddhant Jajoo.
 
-
 # original command
 #qemu-system-aarch64 \
 #    -M virt  \
@@ -15,10 +14,13 @@
 #    -drive file=buildroot/output/images/rootfs.ext4,if=none,format=raw,id=hd0 \
 #    -device virtio-blk-device,drive=hd0 -device virtio-rng-pci
 
+# Figure out where invoked to get path to QEMU and images
+BASEDIR=`dirname $0`
+
 # Ubuntu 20.04 (version spec'ed for ECEA530x) comes with QEMU
 # version 4.2.1, which has limited RPi emulation. I manually
 # downloaded and built 9.0.1 to get better RPi emulation.
-QEMU=qemu/build/qemu-system-aarch64
+QEMU=$BASEDIR/qemu/build/qemu-system-aarch64
 # Default is ctrl-a (0x01), which interferes with bash line editing.
 # 0x1c is ctrl-\ (FS, "file separator")
 QEMU_ESC_CHAR=0x1c
@@ -26,7 +28,7 @@ QEMU_ESC_CHAR=0x1c
 # DTB from build
 # DTB=output/images/bcm2710-rpi-3-b-plus.dtb
 # Bookworm default Pi 3B+ DTB with BT disabled and ttyAMA0 added
-DTB=/home/tga/ecea530x/ecea5307/bcm2710-rpi-3-b-plus-no-bt-w-uart0.dtb
+DTB=$BASEDIR/bcm2710-rpi-3-b-plus-no-bt-w-uart0-for-qemu.dtb
 KERNEL_CMD_LINE="rootwait root=/dev/mmcblk0p2 console=ttyAMA0"
 
 case "$1" in
@@ -35,8 +37,8 @@ case "$1" in
 	IMG=2024-03-15-raspios-bookworm-arm64-lite.img
 	;;
     *)
-	KERNEL=buildroot/output/images/Image
-	IMG=buildroot/output/images/sdcard.img
+	KERNEL=$BASEDIR/buildroot/output/images/Image
+	IMG=$BASEDIR/buildroot/output/images/sdcard.img
     ;;
 esac
 
