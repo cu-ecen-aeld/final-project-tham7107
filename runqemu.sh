@@ -45,8 +45,10 @@ esac
 # Use qemu-img to resize spare file to power of 2 (required by qemu).
 # For more info, see:
 # https://github.com/cu-ecen-aeld/final-project-tham7107/wiki/Building-QEMU#running-qemu
-echo qemu-img resize -f raw $IMG 2G
-echo $QEMU -echr $QEMU_ESC_CHAR -M raspi3b -m 1G -kernel $KERNEL -dtb $DTB -append \"$KERNEL_CMD_LINE\" -drive file=$IMG,if=sd,format=raw -device usb-net,netdev=usbnet0 -netdev user,id=usbnet0,hostfwd=tcp::10022-:22,hostfwd=tcp::9000-:9000 -nographic
+#echo qemu-img resize -f raw $IMG 2G
+#echo $QEMU -echr $QEMU_ESC_CHAR -M raspi3b -m 1G -kernel $KERNEL -dtb $DTB -append \"$KERNEL_CMD_LINE\" -drive file=$IMG,if=sd,format=raw -device usb-net,netdev=usbnet0 -netdev user,id=usbnet0,hostfwd=tcp::10022-:22,hostfwd=tcp::9000-:9000 -nographic
+
+set -xe
 
 qemu-img resize -f raw $IMG 2G
 $QEMU -echr $QEMU_ESC_CHAR -M raspi3b -m 1G -kernel $KERNEL -dtb $DTB -append "$KERNEL_CMD_LINE" -drive file=$IMG,if=sd,format=raw -device usb-net,netdev=usbnet0 -netdev user,id=usbnet0,hostfwd=tcp::10022-:22,hostfwd=tcp::9000-:9000 -nographic
