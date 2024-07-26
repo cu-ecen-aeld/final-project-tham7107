@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Start/stop script for i2c soil driver
+# Thomas Ames, ECEA 5307, July 2024
+# Based on S98aesdchar from ECEA 5305 Assignment 8
+
+case "$1" in
+    start)
+	echo "Loading i2c-soil-drv driver"
+	modprobe i2c-soil-drv
+
+	# retrieve major number
+	major=$(awk "\$2==\"i2c-soil-drv\" {print \$1}" /proc/devices)
+	echo "i2c-soil-drv major number $major"
+
+	# Remove stale nodes and replace them, then give gid and perms
+	rm -f /dev/i2c-soil-drv
+	mknod /dev/i2c-soil-drv c $major 0
+	chgrp staff /dev/i2c-soil-drv
+	chmod 664 /dev/i2c-soil-drv
+	;;
+    stop)
+	echo "Unloading i2c-soil-drv driver"
+	rmmod i2c-soil-drv
+
+	# Remove stale nodes
+	rm -f /dev/i2c-soil-drv
+	;;
+    *)
+	echo "Usage: $0 {start|stop}"
+	exit 1
+esac
+
+exit 0
