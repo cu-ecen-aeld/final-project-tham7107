@@ -11,13 +11,17 @@ case "$1" in
 
 	# retrieve major number
 	major=$(awk "\$2==\"i2c-soil-drv\" {print \$1}" /proc/devices)
-	echo "i2c-soil-drv major number $major"
+	if [ -z $major ]; then
+	    echo "i2c-soil-drv NO MAJOR NUMBER!!!"
+	else
+	    echo "i2c-soil-drv major number $major"
 
-	# Remove stale nodes and replace them, then give gid and perms
-	rm -f /dev/i2c-soil-drv
-	mknod /dev/i2c-soil-drv c $major 0
-	chgrp staff /dev/i2c-soil-drv
-	chmod 664 /dev/i2c-soil-drv
+	    # Remove stale nodes and replace them, then give gid and perms
+	    rm -f /dev/i2c-soil-drv
+	    mknod /dev/i2c-soil-drv c $major 0
+	    chgrp staff /dev/i2c-soil-drv
+	    chmod 664 /dev/i2c-soil-drv
+	fi
 	;;
     stop)
 	echo "Unloading i2c-soil-drv driver"
