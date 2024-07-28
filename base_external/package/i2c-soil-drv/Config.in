@@ -1,0 +1,6 @@
+
+config BR2_PACKAGE_I2C_SOIL_DRV
+	bool "i2c-soil-drv"
+	depends on BR2_LINUX_KERNEL
+	help
+	  i2c-soil-drv driver for i2c soil moisture sensor
