@@ -19,5 +19,9 @@ I2C_SOIL_DRV_GIT_SUBMODULES = YES
 # No quotes around list - won't build, silently fails
 I2C_SOIL_DRV_MODULE_SUBDIRS = i2c-soil-drv
 
+define I2C_SOIL_DRV_INSTALL_TARGET_CMDS
+    $(INSTALL) -D -m 0755 $(@D)/i2c-soil-drv/i2c-soil-drv-test.sh $(TARGET_DIR)/root
+endef
+
 $(eval $(kernel-module))
 $(eval $(generic-package))
