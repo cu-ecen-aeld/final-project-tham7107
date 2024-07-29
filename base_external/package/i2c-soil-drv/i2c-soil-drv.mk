@@ -3,13 +3,18 @@
 #
 
 # a07c04c8976dbd766774b303c2f7ab858f5299a2 is skel commit on issue3 branch
-# 480506cadecfc906ae8a2acafac6965553fe2fec is issue3 commit on main (merge back issue 3 branch
+# 480506cadecfc906ae8a2acafac6965553fe2fec is issue3 commit on main (merge back issue 3 branch)
 I2C_SOIL_DRV_VERSION = 480506cadecfc906ae8a2acafac6965553fe2fec
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
-#I2C_SOIL_DRV_SITE = https://github.com/tham7107/soil-monitor.git
-I2C_SOIL_DRV_SITE = git@github.com:tham7107/soil-monitor.git
+#
+# Despite this warning above ^^^ I changed back to the https to allow
+# graders to easily build the system without needing to load GitHub
+# keys. Using SSH for the repo URL requires a GitHub SSH key, https
+# does not. Not using the automated build/test for ECEA5307.
+#
+I2C_SOIL_DRV_SITE = https://github.com/tham7107/soil-monitor.git
 I2C_SOIL_DRV_SITE_METHOD = git
 I2C_SOIL_DRV_GIT_SUBMODULES = YES
 
