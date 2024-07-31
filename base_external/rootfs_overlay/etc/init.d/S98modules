@@ -1,0 +1,77 @@
+#!/bin/sh
+
+# Start/stop script for i2c soil driver and i2c modules
+# Thomas Ames, ECEA 5307, July 2024
+# Based on S98aesdchar from ECEA 5305 Assignment 8
+
+case "$1" in
+    start)
+	echo "Loading i2c driver"
+	modprobe i2c_bcm2835
+	# Not sure we need i2c_dev
+	modprobe i2c_dev
+
+	# retrieve major number
+	major=$(awk "\$2==\"i2c\" {print \$1}" /proc/devices)
+	if [ -z $major ]; then
+	    echo "i2c NO MAJOR NUMBER!!!"
+	else
+	    echo "i2c major number $major"
+
+	    # Remove stale nodes and replace them, then give gid and
+	    # perms. Minor numbers are specific to the particular Pi
+	    # model, ie, 1 and 2 for RPi3B+, 20 and 21 for RP4B.
+	    # On RPi3B+, bus 1/minor 1 is GPIO2/3
+	    minorA=1
+	    minorB=2
+	    rm -f /dev/i2c-$minorA
+	    rm -f /dev/i2c-$minorB
+	    mknod /dev/i2c-$minorA c $major $minorA
+	    mknod /dev/i2c-$minorB c $major $minorB
+	    # On Debian, group is i2c, but no such group on buildroot,
+	    # so use staff. Debian uses mode 660
+	    chgrp staff /dev/i2c-$minorA
+	    chgrp staff /dev/i2c-$minorB
+	    chmod 660 /dev/i2c-$minorA
+	    chmod 660 /dev/i2c-$minorB
+	fi
+
+	echo "Loading i2c-soil-drv driver"
+	modprobe i2c-soil-drv
+
+	# retrieve major number
+	major=$(awk "\$2==\"i2c-soil-drv\" {print \$1}" /proc/devices)
+	if [ -z $major ]; then
+	    echo "i2c-soil-drv NO MAJOR NUMBER!!!"
+	else
+	    echo "i2c-soil-drv major number $major"
+
+	    # Remove stale nodes and replace them, then give gid and perms
+	    rm -f /dev/i2c-soil-drv
+	    mknod /dev/i2c-soil-drv c $major 0
+	    chgrp staff /dev/i2c-soil-drv
+	    chmod 664 /dev/i2c-soil-drv
+	fi
+	;;
+    stop)
+	echo "Unloading i2c-soil-drv driver"
+	rmmod i2c-soil-drv
+	echo "Unloading i2c driver"
+	rmmod i2c_dev
+	rmmod i2c_bcm2835
+
+	# Remove stale nodes
+	rm -f /dev/i2c-soil-drv
+	rm -f /dev/i2c-?
+	rm -f /dev/i2c-??
+	;;
+    restart)
+	$0 stop
+	$0 start
+	;;
+    *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit 0
