@@ -2,9 +2,8 @@
 # i2c-soild-drv.mk, based on aesd-char.mk
 #
 
-# a07c04c8976dbd766774b303c2f7ab858f5299a2 is skel commit on issue3 branch
-# 480506cadecfc906ae8a2acafac6965553fe2fec is issue3 commit on main (merge back issue 3 branch)
-I2C_SOIL_DRV_VERSION = 480506cadecfc906ae8a2acafac6965553fe2fec
+# 8ad8a2dc881e1b06d1366d0e4ff675d362f8ea3f is issue4 commit on main (merge back issue 4 branch)
+I2C_SOIL_DRV_VERSION = 8ad8a2dc881e1b06d1366d0e4ff675d362f8ea3f
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
