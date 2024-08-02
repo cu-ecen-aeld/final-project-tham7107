@@ -2,8 +2,7 @@
 # soil-mon-app.mk, based on aesd-char.mk
 #
 
-# 8ad8a2dc881e1b06d1366d0e4ff675d362f8ea3f is issue4 commit on main (merge back issue 4 branch)
-SOIL_MON_APP_VERSION = 8ad8a2dc881e1b06d1366d0e4ff675d362f8ea3f
+SOIL_MON_APP_VERSION = f3e0d6096e6df989adb6cbef251e91b69801938d
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
@@ -22,7 +21,7 @@ SOIL_MON_APP_MODULE_SUBDIRS = soil-monitor
 
 # Copy driver test script to /root on target
 define SOIL_MON_APP_INSTALL_TARGET_CMDS
-    $(INSTALL) -D -m 0755 $(@D)/soil-monitor/pump-control.sh $(TARGET_DIR)/root
+    $(INSTALL) -D -m 0755 $(@D)/soil-mon-app/pump-control.sh $(TARGET_DIR)/root
 endef
 
 $(eval $(generic-package))
