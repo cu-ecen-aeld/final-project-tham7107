@@ -1,6 +1,0 @@
-
-config BR2_PACKAGE_SOIL_MON_APP
-	bool "soil-mon-app"
-	depends on BR2_PACKAGE_I2C_SOIL_DRV
-	help
-	  soil-mon-app application for soil moisture monitoring and watering

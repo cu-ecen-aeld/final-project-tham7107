@@ -1,2 +1,2 @@
 source "$BR2_EXTERNAL_project_base_PATH/package/i2c-soil-drv/Config.in"
-source "$BR2_EXTERNAL_project_base_PATH/package/soil-mon-app/Config.in"
+#source "$BR2_EXTERNAL_project_base_PATH/package/soil-mon-app/Config.in"
