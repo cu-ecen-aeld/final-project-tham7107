@@ -3,7 +3,7 @@
 #
 
 # 8ad8a2dc881e1b06d1366d0e4ff675d362f8ea3f is issue4 commit on main (merge back issue 4 branch)
-I2C_SOIL_DRV_VERSION = 8ad8a2dc881e1b06d1366d0e4ff675d362f8ea3f
+I2C_SOIL_DRV_VERSION = 233300d9804554c487b026082f350c21d267a190
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
@@ -22,7 +22,7 @@ I2C_SOIL_DRV_MODULE_SUBDIRS = i2c-soil-drv
 
 # Copy driver test script to /root on target
 define I2C_SOIL_DRV_INSTALL_TARGET_CMDS
-    $(INSTALL) -D -m 0755 $(@D)/i2c-soil-drv/i2c-soil-drv-test.sh $(TARGET_DIR)/root
+    $(INSTALL) -m 0755 $(@D)/i2c-soil-drv/i2c-soil-drv-test.sh $(TARGET_DIR)/root
 endef
 
 $(eval $(kernel-module))
