@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Start/stop script for soil monitor app
+# Thomas Ames, ECEA 5307, August 2024
+# Based on S98aesdchar from ECEA 5305 Assignment 8
+
+case "$1" in
+    start)
+	echo "Starting soil-monitor"
+	/usr/bin/soil-monitor
+	;;
+    stop)
+	echo "Stoping soil-monitor"
+	killall soil-monitor
+	;;
+    restart)
+	$0 stop
+	$0 start
+	;;
+    *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit 0

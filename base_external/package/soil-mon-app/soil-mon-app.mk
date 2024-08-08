@@ -2,7 +2,7 @@
 # soil-mon-app.mk, based on aesd-assignments.mk
 #
 
-SOIL_MON_APP_VERSION = 233300d9804554c487b026082f350c21d267a190
+SOIL_MON_APP_VERSION = ac8bc3f0a5214c29cf41a2bfc2a9a6409d595635
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
@@ -27,6 +27,7 @@ endef
 # Copy driver test script to /root on target, app to /usr/bin
 define SOIL_MON_APP_INSTALL_TARGET_CMDS
     $(INSTALL) -m 0755 $(@D)/soil-mon-app/pump-control.sh $(TARGET_DIR)/root
+    $(INSTALL) -m 0755 $(@D)/soil-mon-app/soil-monitor $(TARGET_DIR)/usr/bin
 endef
 
 $(eval $(generic-package))
