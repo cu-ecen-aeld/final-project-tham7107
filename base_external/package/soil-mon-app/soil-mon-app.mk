@@ -2,7 +2,7 @@
 # soil-mon-app.mk, based on aesd-assignments.mk
 #
 
-SOIL_MON_APP_VERSION = ac8bc3f0a5214c29cf41a2bfc2a9a6409d595635
+SOIL_MON_APP_VERSION = efa5dc29ad80f2d663dd5076db3f79349f108b29
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
@@ -15,6 +15,8 @@ SOIL_MON_APP_VERSION = ac8bc3f0a5214c29cf41a2bfc2a9a6409d595635
 SOIL_MON_APP_SITE = https://github.com/tham7107/soil-monitor.git
 SOIL_MON_APP_SITE_METHOD = git
 SOIL_MON_APP_GIT_SUBMODULES = YES
+# Ensure MQTT is built first so we have access to includes
+SOIL_MON_APP_DEPENDENCIES=paho-mqtt-c
 
 # No quotes around list - won't build, silently fails
 SOIL_MON_APP_MODULE_SUBDIRS = soil-monitor

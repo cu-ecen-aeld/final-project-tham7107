@@ -7,10 +7,10 @@
 case "$1" in
     start)
 	echo "Starting soil-monitor"
-	/usr/bin/soil-monitor
+	/usr/bin/soil-monitor -m tcp://broker.mqtt.cool:1883
 	;;
     stop)
-	echo "Stoping soil-monitor"
+	echo "Stopping soil-monitor"
 	killall soil-monitor
 	;;
     restart)

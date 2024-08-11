@@ -2,7 +2,7 @@
 # i2c-soild-drv.mk, based on aesd-char.mk
 #
 
-I2C_SOIL_DRV_VERSION = ac8bc3f0a5214c29cf41a2bfc2a9a6409d595635
+I2C_SOIL_DRV_VERSION = efa5dc29ad80f2d663dd5076db3f79349f108b29
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
